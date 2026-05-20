@@ -1,2 +1,2 @@
-import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';
-export default function Page(){return <AIInsightLayout title="竞品洞察" description="展示竞品提及、对比理由与流失风险信号。"/>}
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getCompetitorInsights } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getCompetitorInsights();return <AIInsightLayout title='竞品洞察' description='看清输给谁、输在哪里、怎么打回来'>{data.slice(0,5).map(i=><p key={i.id}>{i.competitorModel} 提及{ i.mentionCount }次；建议动作：围绕{i.keyComparisonPoints[0]}强化攻防话术。</p>)}</AIInsightLayout>}

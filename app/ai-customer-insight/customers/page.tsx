@@ -1,2 +1,4 @@
+import Link from 'next/link';
 import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';
-export default function Page(){return <AIInsightLayout title="客户画像" description="展示客户特征、需求偏好和分层洞察信息。"/>}
+import { getCustomers } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){ const data=await getCustomers(); return <AIInsightLayout title='客户画像' description='客户列表与风险识别'><table><thead><tr><th>客户姓名</th><th>手机号</th><th>意向车型</th><th>购车阶段</th><th>意向等级</th><th>风险等级</th><th>主要顾虑</th><th>负责人</th></tr></thead><tbody>{data.map(c=><tr key={c.id}><td><Link href={`/ai-customer-insight/customers/${c.id}`}>{c.name}</Link></td><td>{c.phoneMasked}</td><td>{c.intendedModel}</td><td>{c.currentStage}</td><td>{c.intentLevel}</td><td>{c.riskLevel==='high'?'🔴高风险':c.riskLevel}</td><td>{c.mainConcerns.join('、')}</td><td>{c.ownerName}</td></tr>)}</tbody></table></AIInsightLayout> }

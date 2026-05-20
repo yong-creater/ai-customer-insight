@@ -1,2 +1,2 @@
-import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';
-export default function Page(){return <AIInsightLayout title="门店诊断" description="展示门店执行问题、区域对标与改善方向。"/>}
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getStoreDiagnosis } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getStoreDiagnosis();return <AIInsightLayout title='门店诊断' description='哪个门店有问题、为什么、怎么改'>{data.map(s=><p key={s.id}>{s.storeName}：问题{ s.issueTags.join('、') }；建议：{s.suggestedActions[0]}</p>)}</AIInsightLayout>}

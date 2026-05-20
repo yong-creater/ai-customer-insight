@@ -1,0 +1,2 @@
+import { getCustomerById } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page({params}:{params:{id:string}}){const c=await getCustomerById(params.id); if(!c) return <main>无数据</main>; return <main style={{padding:12}}><h1>{c.name}</h1><p>{c.phoneMasked}｜{c.intendedModel}｜{c.currentStage}</p><p>顾虑：{c.mainConcerns.join('、')}</p><p>下一步建议：针对{c.mainConcerns[0]}进行价值重构并锁定复访时间。</p></main>}
