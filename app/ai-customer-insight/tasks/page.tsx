@@ -1,0 +1,2 @@
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getImprovementTasks } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getImprovementTasks();return <AIInsightLayout title='改善任务中心' description='发现问题→处理问题→验证结果'><p>待处理：{data.filter(t=>t.status==='pending').length}｜处理中：{data.filter(t=>t.status==='in_progress').length}｜已完成：{data.filter(t=>t.status==='done').length}｜已验证：{data.filter(t=>t.status==='verified').length}</p></AIInsightLayout>}

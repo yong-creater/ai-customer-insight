@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';
+import { getAudioRecords } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){ const data=await getAudioRecords(); return <AIInsightLayout title='录音分析' description='录音列表'><table><thead><tr><th>录音时间</th><th>客户</th><th>销售</th><th>门店</th><th>车型</th><th>场景</th><th>时长</th><th>分析状态</th><th>风险</th></tr></thead><tbody>{data.map(r=><tr key={r.id}><td>{r.callTime.slice(0,16).replace('T',' ')}</td><td><Link href={`/ai-customer-insight/audio-records/${r.id}`}>{r.customerName}</Link></td><td>{r.salesName}</td><td>{r.storeName}</td><td>{r.intendedModel}</td><td>{r.sourceType}</td><td>{r.duration}s</td><td>{r.analysisStatus}</td><td>{r.riskLevel}</td></tr>)}</tbody></table></AIInsightLayout> }

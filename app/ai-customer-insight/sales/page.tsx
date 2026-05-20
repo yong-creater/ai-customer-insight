@@ -1,0 +1,2 @@
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getSalesPerformances } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getSalesPerformances();return <AIInsightLayout title='销售能力' description='聚焦能力提升'>{data.map(s=><p key={s.id}>{s.salesName} 质检分{Math.round((s.communicationScore+s.conversionScore)/2)}；建议辅导：{s.coachingSuggestions[0]}</p>)}</AIInsightLayout>}
