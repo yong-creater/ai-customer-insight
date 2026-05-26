@@ -1,0 +1,2 @@
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getSpeechTemplates } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getSpeechTemplates();return <AIInsightLayout title='话术知识库' description='可直接用于一线沟通'>{data.slice(0,10).map(t=><p key={t.id}>{t.name}｜场景：{t.scenario}｜话术：{t.content}</p>)}</AIInsightLayout>}

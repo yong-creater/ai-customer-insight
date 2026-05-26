@@ -1,0 +1,2 @@
+import { AIInsightLayout } from '@/components/ai-customer-insight/AIInsightLayout';import { getConcernInsights } from '@/src/features/ai-customer-insight/mock/service';
+export default async function Page(){const data=await getConcernInsights();return <AIInsightLayout title='客户问题洞察' description='问题→影响→证据→建议动作'><p>总问题数：{data.length}</p>{data.slice(0,10).map(i=><p key={i.id}>{i.concernLabel}（{i.count}）- 建议：针对该问题做专项话术演练。</p>)}</AIInsightLayout>}
